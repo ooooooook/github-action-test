@@ -53,6 +53,8 @@ jobs:
               run: |
                 ls -al
                 pwd
+                find . ! -path "./build*" -mindepth 1 -delete
+                ls -al
 
             # zip
             - name: Zip build directory
