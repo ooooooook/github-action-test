@@ -58,8 +58,9 @@ jobs:
                 git config --global user.name "ooooooook"
                 git config --global user.email "che.yx@qq.com"
                 git add .
+                git status
                 git commit -m "update"
-                git push
+                git push -f origin main
 
             # Create Release
             - name: Create Release
