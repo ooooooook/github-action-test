@@ -36,7 +36,7 @@ jobs:
               with:
                   cmd: build
 
-            # 签出main
+            # Checkout main
             - name: Checkout main
               uses: actions/checkout@v3
               with:
@@ -67,8 +67,8 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
-                  tag_name: ${{ github.ref }}
-                  release_name: Release ${{ github.ref }}
+                  tag_name: ${{ github.event.head_commit.message }}
+                  release_name: ${{ github.event.head_commit.message }}
                   draft: false
                   prerelease: false
 
