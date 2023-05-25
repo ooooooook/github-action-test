@@ -74,7 +74,6 @@ jobs:
                   release_name: ${{ github.event.head_commit.message }}
                   draft: false
                   prerelease: false
-                  body: 我是一个测试信息
 
             # Build Release Asset
             - name: Build Release Asset
