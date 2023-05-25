@@ -34,13 +34,6 @@ jobs:
               with:
                   cmd: build
 
-            # cache
-            - name: Cache directory
-              uses: actions/cache@v2
-              with:
-                  path: build
-                  key: ${{ runner.os }}-cache-directory-${{ hashFiles('yarn.lock') }}
-
             # 签出main
             - name: Checkout main
               uses: actions/checkout@v3
@@ -51,10 +44,10 @@ jobs:
             # Copy Files
             - name: Copy Files
               run: |
-                find . ! -path "./build*" ! -path "./.git*" -mindepth 1 -delete
-                cp -r -f ./build/* ./
-                rm -r build
-                ls -al
+                  find . ! -path "./build*" ! -path "./.git*" -mindepth 1 -delete
+                  cp -r -f ./build/* ./
+                  rm -r build
+                  ls -al
 
             # Git commit & push
             - name: Git commit & push
@@ -64,13 +57,15 @@ jobs:
                 git add .
                 git commit -m "update"
                 git push origin HEAD:main
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Zip build directory
-              run: zip -r package.zip build
-
-            # Upload artifact
-            - name: Upload artifact
-              uses: actions/upload-artifact@v2
-              with:
-                  name: package
-                  path: package.zip
+#            - name: Zip build directory
+#              run: zip -r package.zip build
+#
+#            # Upload artifact
+#            - name: Upload artifact
+#              uses: actions/upload-artifact@v2
+#              with:
+#                  name: package
+#                  path: package.zip
