@@ -35,7 +35,7 @@ jobs:
 
             # zip
             - name: Zip build directory
-              uses: zip -r package.zip build
+              run: zip -r package.zip build
 
             # Upload artifact
             - name: Upload artifact
