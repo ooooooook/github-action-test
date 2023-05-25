@@ -33,12 +33,13 @@ jobs:
               with:
                   cmd: build
 
-            # Release
-            - name: Release
-              uses: ncipollo/release-action@v1
+            # zip
+            - name: Zip build directory
+              uses: zip -r package.zip build
+
+            # Upload artifact
+            - name: Upload artifact
+              uses: actions/upload-artifact@v2
               with:
-                  allowUpdates: true
-                  artifactErrorsFailBuild: true
-                  artifacts: 'package.zip'
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  prerelease: true
+                  name: package
+                  path: package.zip
