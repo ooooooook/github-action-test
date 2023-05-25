@@ -1,7 +1,7 @@
 name: Create Release
 
 on:
-    create:
+    push:
         branches:
             - dev
 
@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Check
-              if: !startsWith(github.event.head_commit.message, 'v')
+              if: '!startsWith(github.event.head_commit.message, "v")'
               run: exit 0
 
             # Checkout
