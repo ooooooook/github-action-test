@@ -1,4 +1,4 @@
-name: Create Release on Tag Push
+name: Create Release
 
 on:
     push:
@@ -32,6 +32,18 @@ jobs:
               uses: borales/actions-yarn@v4
               with:
                   cmd: build
+
+            # 签出main
+            - name: Checkout main
+              uses: actions/checkout@v3
+              with:
+                  ref: main
+
+            # ls & pwd
+            - name: ls & pwd
+              run: |
+                ls -al
+                pwd
 
             # zip
             - name: Zip build directory
