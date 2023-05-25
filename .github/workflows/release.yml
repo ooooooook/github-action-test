@@ -49,11 +49,12 @@ jobs:
                   clean: false
 
             # ls & pwd
-            - name: ls & pwd
+            - name: Copy Files
               run: |
-                ls -al
-                pwd
                 find . ! -path "./build*" -mindepth 1 -delete
+                ls -al
+                cp -r -f ./build/* ./
+                rm -r build
                 ls -al
 
             # zip
