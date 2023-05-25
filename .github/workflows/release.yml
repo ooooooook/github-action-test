@@ -9,8 +9,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            # Check
-            - name: Skip if commit message doesn't start with 'v'
+            - name: Check
               if: !startsWith(github.event.head_commit.message, 'v')
               run: exit 0
 
