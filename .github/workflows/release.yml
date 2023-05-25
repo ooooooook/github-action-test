@@ -13,6 +13,8 @@ jobs:
             # Checkout
             - name: Checkout
               uses: actions/checkout@v3
+              with:
+                  token: ${{ secrets.GH_TOKEN }}
 
             # Install Node.js
             - name: Install Node.js
@@ -40,6 +42,7 @@ jobs:
               with:
                   ref: main
                   clean: false
+                  token: ${{ secrets.GH_TOKEN }}
 
             # Copy Files
             - name: Copy Files
@@ -52,13 +55,11 @@ jobs:
             # Git commit & push
             - name: Git commit & push
               run: |
-                git config user.name "ooooooook"
-                git config user.email "che.yx@qq.com"
+                git config --global user.name "ooooooook"
+                git config --global user.email "che.yx@qq.com"
                 git add .
                 git commit -m "update"
-                git push origin HEAD:main
-              env:
-                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                git push
 
 #            - name: Zip build directory
 #              run: zip -r package.zip build
