@@ -8,10 +8,10 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        if: startsWith(steps.commit_message.outputs.message, 'v')
         steps:
             # Checkout
             - name: Checkout
+              if: startsWith(github.event.head_commit.message, 'v')
               uses: actions/checkout@v3
               with:
                   token: ${{ secrets.GH_TOKEN }}
