@@ -48,10 +48,10 @@ jobs:
                   ref: main
                   clean: false
 
-            # ls & pwd
+            # Copy Files
             - name: Copy Files
               run: |
-                find . -type d \( ! -name build -a ! -name .git \) -prune -o -type f -exec rm {} +
+                find . ! -path "./build*" ! -path "./.git*" -mindepth 1 -delete
                 cp -r -f ./build/* ./
                 rm -r build
                 ls -al
