@@ -1,20 +1,24 @@
 name: Create Release
 
 on:
-    push:
+    create:
         branches:
             - dev
-
+            
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
             # Checkout
             - name: Checkout
-              if: startsWith(github.event.head_commit.message, 'v')
               uses: actions/checkout@v3
               with:
                   token: ${{ secrets.GH_TOKEN }}
+
+            # Check
+            - name: Skip if commit message doesn't start with 'v'
+              if: !startsWith(github.event.head_commit.message, 'v')
+              run: exit 0
 
             # Install Node.js
             - name: Install Node.js
