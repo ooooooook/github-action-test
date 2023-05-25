@@ -58,7 +58,7 @@ jobs:
                 git commit -m "update"
                 git push origin HEAD:main
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 #            - name: Zip build directory
 #              run: zip -r package.zip build
