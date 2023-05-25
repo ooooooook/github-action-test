@@ -33,12 +33,15 @@ jobs:
               uses: borales/actions-yarn@v4
               with:
                   cmd: build
-              run: |
-                  # 在这里进行构建操作
-                  # 假设构建目录为 `dist`
-                  echo "::set-output name=build_dir::build"
 
-            # 签出main  如何引用上一个step输出的东西？？
+            # cache
+            - name: Cache directory
+              uses: actions/cache@v2
+              with:
+                  path: build
+                  key: ${{ runner.os }}-cache-directory-${{ hashFiles('yarn.lock') }}
+
+            # 签出main
             - name: Checkout main
               uses: actions/checkout@v3
               with:
@@ -49,7 +52,6 @@ jobs:
               run: |
                 ls -al
                 pwd
-                ls -al ${{ steps.build_step.outputs.build_dir }}
 
             # zip
             - name: Zip build directory
