@@ -4,11 +4,11 @@ on:
     push:
         branches:
             - dev
-
+        paths:
+            - public/widget.json
 jobs:
     build:
         runs-on: ubuntu-latest
-        if: startsWith(github.event.head_commit.message, 'v')
         steps:
 
             # Checkout
@@ -90,13 +90,3 @@ jobs:
                   asset_path: ./package.zip
                   asset_name: package.zip
                   asset_content_type: application/zip
-
-#            - name: Zip build directory
-#              run: zip -r package.zip build
-#
-#            # Upload artifact
-#            - name: Upload artifact
-#              uses: actions/upload-artifact@v2
-#              with:
-#                  name: package
-#                  path: package.zip
