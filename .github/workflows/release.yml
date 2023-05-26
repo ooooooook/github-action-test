@@ -19,7 +19,7 @@ jobs:
 
             - name: getVersion
               run: |
-                export RELEASE_VERSION=${grep -o '"version": "[^"]*",' public/widget.json | sed 's/"version": "//' | sed 's/",$//'}
+                RELEASE_VERSION=`grep -o '"version": "[^"]*",' public/widget.json | sed 's/"version": "//' | sed 's/",$//'`
                 echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
 
             # Install Node.js
