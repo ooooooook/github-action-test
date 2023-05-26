@@ -10,6 +10,10 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
+            - name: getVersion
+              run: |
+                export RELEASE_VERSION=${grep -o '"version": "[^"]*",' public/widget.json | sed 's/"version": "//' | sed 's/",$//'}
+                echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
 
             # Checkout
             - name: Checkout
@@ -60,7 +64,7 @@ jobs:
                 git config --global user.email "che.yx@qq.com"
                 git add .
                 git status
-                git commit -m "update"
+                git commit -m "update to $RELEASE_VERSION"
                 git push -f origin main
 
             # Create Release
@@ -70,8 +74,8 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
-                  tag_name: ${{ github.event.head_commit.message }}
-                  release_name: ${{ github.event.head_commit.message }}
+                  tag_name: ${{ env.RELEASE_VERSION }}
+                  release_name: ${{ env.RELEASE_VERSION }}
                   draft: false
                   prerelease: false
 
