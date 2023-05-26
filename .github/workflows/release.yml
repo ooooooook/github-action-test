@@ -80,6 +80,7 @@ jobs:
                   release_name: ${{ env.RELEASE_VERSION }}
                   draft: false
                   prerelease: false
+                  body: ${{ github.event.head_commit.message }}
 
             # Build Release Asset
             - name: Build Release Asset
