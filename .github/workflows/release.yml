@@ -78,7 +78,8 @@ jobs:
             # Build Release Asset
             - name: Build Release Asset
               run: |
-                zip -r package.zip ./  -x  './git/*'
+                rm -rf .git
+                zip -r package.zip ./
 
             # Upload Release Asset
             - name: Upload Release Asset
